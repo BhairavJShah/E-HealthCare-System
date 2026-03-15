@@ -17,11 +17,20 @@ let auth: any;
 let db: any;
 let storage: any;
 
-if (process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
-  const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-  auth = getAuth(app);
-  db = getFirestore(app);
-  storage = getStorage(app);
+console.log("Firebase Check - API Key:", !!process.env.NEXT_PUBLIC_FIREBASE_API_KEY);
+
+if (process.env.NEXT_PUBLIC_FIREBASE_API_KEY && process.env.NEXT_PUBLIC_FIREBASE_API_KEY !== "your_api_key") {
+  try {
+    const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
+    storage = getStorage(app);
+    console.log("Firebase Initialized Successfully");
+  } catch (e) {
+    console.error("Firebase Init Error:", e);
+  }
+} else {
+  console.warn("Firebase credentials missing or invalid - using placeholder mode");
 }
 
 export { auth, db, storage };

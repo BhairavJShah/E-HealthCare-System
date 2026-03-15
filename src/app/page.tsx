@@ -281,8 +281,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* AI Chatbot Component */}
-        <HealthChatbot />
+        {/* AI Chatbot Component temporarily disabled for debugging */}
+        {/* <HealthChatbot /> */}
       </main>
     </div>
   );
